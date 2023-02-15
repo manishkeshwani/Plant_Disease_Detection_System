@@ -23,8 +23,8 @@ with st.sidebar:
 # funtion to predict the disease from trained model
 def predict(model,img,class_names):
     images = load_img(img,target_size =(256,256)) 
-    img_array = tf.expand_dims(images,0)
-    predictions = model.predict(img_array)
+    # img_array = tf.expand_dims(images,0)
+    predictions = model.predict(images)
     predicted_class = class_names[np.argmax(predictions[0])]
     confidence = round(100 * (np.max(predictions[0])), 2)
     return predicted_class, confidence
@@ -33,7 +33,6 @@ def predict(model,img,class_names):
 # Funtion to print image and predicted result
 def image_model_prediction(img,model,class_names):
     st.image(img,width=700)
-    model = model + ".h5"
     MODEL = tf.keras.models.load_model(model, compile=False)
     if st.button('Predict'):      
       classs , comfidence = predict(MODEL,img,class_names)
@@ -55,7 +54,7 @@ if(selected == 'Apple'):
                     3:'Healthy'}
 
     if apple is not None:
-      image_model_prediction(apple,"apple_model",class_names)
+      image_model_prediction(apple,"apple_model.h5",class_names)
         
 
 # Tomato Page
@@ -74,7 +73,7 @@ if(selected == 'Tomato'):
                     8: 'Tomato_mosaic_virus',
                     9: 'Healthy'}
     if tomato is not None:
-      image_model_prediction(tomato,"tomato_model",class_names)
+      image_model_prediction(tomato,"tomato_model.h5",class_names)
 
 
 # Potato Page
@@ -86,7 +85,7 @@ if(selected == 'Potato'):
                     1: 'Healthy',
                     2: 'Late_Blight'}
     if potato is not None:
-      image_model_prediction(potato,"potato_model",class_names)
+      image_model_prediction(potato,"potato_model.h5",class_names)
 
 
 # Corn Page
@@ -99,7 +98,7 @@ if(selected == 'Corn'):
                   2:'Gray_Leaf_Spot',
                   3:'Healthy'}
     if corn is not None:
-        image_model_prediction(corn,"corn_model",class_names)
+        image_model_prediction(corn,"corn_model.h5",class_names)
 
 
 # Cherry Page
@@ -109,7 +108,7 @@ if(selected == 'Cherry'):
     cherry = st.file_uploader("Please Upload an Image",type=['jpg','png','jpeg'],key="5")
     class_names = {0:'Powdery_mildew', 1:'Healthy'}
     if cherry is not None:
-        image_model_prediction(cherry,"cherry_model",class_names)
+        image_model_prediction(cherry,"cherry_model.h5",class_names)
 
 
 # Pepper Page
@@ -119,7 +118,7 @@ if(selected == 'Pepper'):
     pepper = st.file_uploader("Please Upload an Image",type=['jpg','png','jpeg'],key="6")
     class_names = {0:'Bacterial_spot',1:'Healthy'}
     if pepper is not None:
-        image_model_prediction(pepper,"pepper_model",class_names)
+        image_model_prediction(pepper,"pepper_model.h5",class_names)
 
 
 # Peach Page
@@ -129,7 +128,7 @@ if(selected == 'Peach'):
     peach = st.file_uploader("Please Upload an Image",type=['jpg','png','jpeg'],key="7")
     class_names = {0:'Bacterial_spot',1:'Healthy'}
     if peach is not None:
-        image_model_prediction(peach,"peach_model",class_names)
+        image_model_prediction(peach,"peach_model.h5",class_names)
 
 
 # Grapes Page
@@ -143,7 +142,7 @@ if(selected == 'Grapes'):
                     3: 'Healthy'}
 
     if grapes is not None:
-      image_model_prediction(grapes,"grapes_model",class_names)
+      image_model_prediction(grapes,"grapes_model.h5",class_names)
 
 
 # Strawberry Page
@@ -153,7 +152,7 @@ if(selected == 'Strawberry'):
     strawberry = st.file_uploader("Please Upload an Image",type=['jpg','png','jpeg'],key="9")
     class_names = {0:'Leaf_scorch',1: 'Healthy'}
     if strawberry is not None:
-        image_model_prediction(strawberry,"strawberry_model",class_names)
+        image_model_prediction(strawberry,"strawberry_model.h5",class_names)
 
 
 # Orange Page
@@ -165,7 +164,7 @@ if(selected == 'Orange'):
                     1: 'Healthy'}
 
     if orange is not None:
-      image_model_prediction(orange,"orange_model",class_names)
+      image_model_prediction(orange,"orange_model.h5",class_names)
 
 
 # Rice Page
@@ -175,7 +174,7 @@ if(selected == 'Rice'):
     rice = st.file_uploader("Please Upload an Image",type=['jpg','png','jpeg'],key="11")
     class_names = {0:'Bacterial leaf blight', 1:'Brown spot', 2:'Leaf smut'}
     if rice is not None:
-      image_model_prediction(rice,"rice_model",class_names)
+      image_model_prediction(rice,"rice_model.h5",class_names)
 
 
 # About Page
