@@ -5,7 +5,4 @@ protobuf==3.20.1
 pandas
 matplotlib
 tensorflow
-
-tensorflow.keras.utils
-
-keras.models
+keras
