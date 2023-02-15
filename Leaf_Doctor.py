@@ -34,7 +34,7 @@ def predict(model,img,class_names):
 def image_model_prediction(img,model,class_names):
     st.image(img,width=700)
     model = model + ".h5"
-    MODEL = tf.keras.models.load_model(model)
+    MODEL = tf.keras.models.load_model(model, compile=False)
     if st.button('Predict'):      
       classs , comfidence = predict(MODEL,img,class_names)
       if(classs != "Healthy"):
