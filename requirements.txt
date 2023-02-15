@@ -5,3 +5,12 @@ protobuf==3.20.1
 pandas
 matplotlib
 tensorflow
+
+from tensorflow.keras.utils import load_img
+import tensorflow as tf
+from streamlit_option_menu import option_menu
+
+from tensorflow.keras.utils import img_to_array
+from tensorflow.keras.utils import load_img
+from keras.models import load_model
+from keras.applications.vgg19 import preprocess_input
