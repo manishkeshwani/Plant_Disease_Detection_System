@@ -2,8 +2,12 @@ import streamlit as st
 import numpy as np
 from tensorflow.keras.utils import load_img
 import tensorflow as tf
-
 from streamlit_option_menu import option_menu
+
+from tensorflow.keras.utils import img_to_array
+from tensorflow.keras.utils import load_img
+from keras.models import load_model
+from keras.applications.vgg19 import preprocess_input
 
 with st.sidebar:
     selected = option_menu(menu_title = "Leaf Doctor",
@@ -22,7 +26,12 @@ with st.sidebar:
 
 # funtion to predict the disease from trained model
 def predict(model,img,class_names):
-    images = load_img(img,target_size =(256,256)) 
+
+
+    images = load_img(img,target_size =(256,256))
+    i = img_to_array(images)
+    im = preprocess_input(i) 
+    img = np.expand_dims(im , axis = 0)
     # img_array = tf.expand_dims(images,0)
     predictions = model.predict(images)
     predicted_class = class_names[np.argmax(predictions[0])]
@@ -30,10 +39,20 @@ def predict(model,img,class_names):
     return predicted_class, confidence
 
 
+
+    # images = load_img(img,target_size =(256,256)) 
+    # img_array = tf.expand_dims(images,0)
+    # predictions = model.predict(img_array)
+    # predicted_class = class_names[np.argmax(predictions[0])]
+    # confidence = round(100 * (np.max(predictions[0])), 2)
+    # return predicted_class, confidence
+
+
 # Funtion to print image and predicted result
 def image_model_prediction(img,model,class_names):
     st.image(img,width=700)
-    MODEL = tf.keras.models.load_model(model, compile=False)
+    # MODEL = tf.keras.models.load_model(model, compile=False)
+    MODEL = load_model(model, compile=False)
     if st.button('Predict'):      
       classs , comfidence = predict(MODEL,img,class_names)
       if(classs != "Healthy"):
