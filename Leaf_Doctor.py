@@ -33,7 +33,7 @@ def predict(model,img,class_names):
     im = preprocess_input(i) 
     img = np.expand_dims(im , axis = 0)
     # img_array = tf.expand_dims(images,0)
-    predictions = model.predict(images)
+    predictions = model.predict(img)
     predicted_class = class_names[np.argmax(predictions[0])]
     confidence = round(100 * (np.max(predictions[0])), 2)
     return predicted_class, confidence
